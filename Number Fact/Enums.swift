@@ -14,11 +14,9 @@ enum Colors {
     var rawValue : UIColor {
         get {
             switch self {
-            case .background : return UIColor.init(rgb: 0x1A203A)
-            case .themeLight : return UIColor.init(rgb: 0x262D49)
-            case .themeYellow : return UIColor.init(rgb: 0xF0BC66)
-            default:
-                break
+                case .background : return UIColor.init(rgb: 0x1A203A)
+                case .themeLight : return UIColor.init(rgb: 0x262D49)
+                case .themeYellow : return UIColor.init(rgb: 0xF0BC66)
             }
         }
     }
