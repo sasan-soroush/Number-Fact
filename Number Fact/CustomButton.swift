@@ -40,7 +40,6 @@ class CustomButton : UIButton {
             bringSubview(toFront: self.titleLabel!)
         }
         
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

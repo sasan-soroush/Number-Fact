@@ -53,8 +53,6 @@ class MainViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = Colors.themeLight.rawValue
         view.layer.cornerRadius = 8
-        view.layer.borderColor = Colors.themeYellow.rawValue.cgColor
-        view.layer.borderWidth = 1
         view.clipsToBounds = true
         return view
     }()
@@ -70,8 +68,6 @@ class MainViewController: UIViewController {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "burn"), for: UIControlState.normal)
         button.clipsToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = Colors.themeYellow.rawValue.cgColor
         return button
     }()
     
