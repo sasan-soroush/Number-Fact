@@ -88,15 +88,23 @@ extension MainViewController {
 
 extension MainViewController {
     
-    fileprivate func getNumberInfo(_ type: InformationTypes?) {
+    func startLoading() {
         self.blurredEffectView.isHidden = false
         self.view.isUserInteractionEnabled = false
         self.customIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        self.blurredEffectView.isHidden = true
+        self.view.isUserInteractionEnabled = true
+        self.customIndicator.stopAnimating()
+    }
+    
+    fileprivate func getNumberInfo(_ type: InformationTypes?) {
+        startLoading()
         API.getInformation(number: UInt(numberTextField.text!)!, type: type!) { (success, response) in
             DispatchQueue.main.async {
-                self.blurredEffectView.isHidden = true
-                self.view.isUserInteractionEnabled = true
-                self.customIndicator.stopAnimating()
+                self.stopLoading()
                 if success , response != nil {
                     self.resultTextView.text = response!.text ?? "This number has uncovered secrets in this era."
                 } else {
@@ -106,49 +114,74 @@ extension MainViewController {
         }
     }
     
+    fileprivate func getDateInfo() {
+        if dayTextField.text != "" , monthTextField.text != ""  {
+            if UInt8(dayTextField.text!) != nil , UInt8(monthTextField.text!) != nil {
+                startLoading()
+                API.getDateInformation(day: UInt8(dayTextField.text!)!, month: UInt8(monthTextField.text!)!) { (success, response) in
+                    DispatchQueue.main.async {
+                        self.stopLoading()
+                        self.blurredEffectView.isHidden = true
+                        self.view.isUserInteractionEnabled = true
+                        self.customIndicator.stopAnimating()
+                        if success , response != nil {
+                            self.resultTextView.text = response!.text ?? "This number has uncovered secrets in this era."
+                        } else {
+                            Helper.alert(self, title: "", body: "Something Went Wrong!!\nPlease try again later")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     @objc private func buttonTapped(button : UIButton) {
         
         if button.tag == 5 {
             
-            guard numberTextField.text != ""  else {
-                Helper.alert(self, title: "", body: "Please Enter a Number.")
-                return
+            
+            if selectedButtonTag == 2 {
+                getDateInfo()
+            } else {
+                guard numberTextField.text != ""  else {
+                    Helper.alert(self, title: "", body: "Please Enter a Number.")
+                    return
+                }
+                
+                guard  UInt(numberTextField.text!) != nil else {
+                    Helper.alert(self, title: "", body: "Please Enter a Valid Number.")
+                    return
+                }
+                
+                if !isExpanded {
+                    Helper.alert(self, title: "Choose Fact Type", body: "Please choose one of above options.")
+                    return
+                }
+                
+                var type : InformationTypes?
+                
+                switch selectedButtonTag {
+                case 1 :
+                    type = .math
+                    break
+                case 3 :
+                    type = .year
+                    break
+                case 4 :
+                    type = .trivia
+                    break
+                default :
+                    type = nil
+                }
+                
+                guard type != nil else {
+                    Helper.alert(self, title: "Choose Fact Type", body: "Please choose one of above options.")
+                    return
+                }
+                
+                getNumberInfo(type)
             }
             
-            guard  UInt(numberTextField.text!) != nil else {
-                Helper.alert(self, title: "", body: "Please Enter a Valid Number.")
-                return
-            }
-            
-            if !isExpanded {
-                Helper.alert(self, title: "Choose Fact Type", body: "Please choose one of above options.")
-                return
-            }
-            
-            var type : InformationTypes?
-            
-            switch selectedButtonTag {
-            case 1 :
-                type = .math
-                break
-            case 2 :
-                break
-            case 3 :
-                type = .year
-                break
-            case 4 :
-                type = .trivia
-                break
-            default :
-                type = nil
-            }
-            
-            guard type != nil else {
-                Helper.alert(self, title: "Choose Fact Type", body: "Please choose one of above options.")
-                return
-            }
-            
-            getNumberInfo(type)
             
         } else {
             selectButton(selectedButton: button)
@@ -267,17 +300,20 @@ extension MainViewController {
     
     fileprivate func showKeyboardAnimation(_ keyboardSize: CGRect? , open : Bool) {
         
+        
         self.resultBackView.alpha = open ? 0 : 1
         self.buttomView.alpha = open ? 0 : 1
         self.hitButton.alpha = open ? 0 : 1
-        if buttonsValid() {
-            self.mathButton!.alpha = open ? 0 : 1
-            self.triviaButton!.alpha = open ? 0 : 1
-            self.yearButton!.alpha = open ? 0 : 1
-            self.dateButton!.alpha = open ? 0 : 1
-        }
+//        if buttonsValid() {
+//
+//            let buttons : [UIButton] = [mathButton!, triviaButton!, yearButton!, dateButton!]
+//            let unselectedOnes = buttons.filter {$0.tag != selectedButtonTag}
+//            unselectedOnes.forEach{$0.alpha = open ? 0 : 1}
+//        }
         if open {
-            self.textFieldView.center.y = (view.frame.height - keyboardSize!.height)/2
+            if buttonsValid() {
+                self.textFieldView.frame.origin.y = triviaButton!.frame.maxY + margin
+            }
         } else {
             self.textFieldView.frame.origin.y = resultBackView.frame.maxY + 10
         }
@@ -306,6 +342,46 @@ extension MainViewController : UITextFieldDelegate {
             Helper.alert(self, title: "Choose Fact Type", body: "Please choose one of above options.")
             textField.resignFirstResponder()
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+       
+        switch textField.tag {
+        case 2:
+            return setLimitations(textField: textField, string: string, range: range, countLimit: 2, characters: "1234567890")
+        case 3:
+            return setLimitations(textField: textField, string: string, range: range, countLimit: 2, characters: "1234567890")
+        default:
+            
+            var limit = 18
+            if selectedButtonTag == 3 {
+                limit = 4
+            }
+            return setLimitations(textField: textField, string: string, range: range, countLimit: limit, characters: "1234567890")
+        }
+    }
+    
+    private func setLimitations(textField : UITextField , string : String ,range : NSRange, countLimit : Int , characters : String) -> Bool {
+        var isValidAmount = true
+        guard let txt = textField.text else {return false}
+        guard let stringToInt = Int(String(txt + string)) else {return false}
+        isValidAmount = txt.count <= countLimit
+        
+        switch textField.tag {
+        case 2:
+            isValidAmount = stringToInt <= 12
+        case 3:
+            isValidAmount = stringToInt <= 31
+        default:
+            isValidAmount = true
+        }
+        
+        guard let text = textField.text else { return true }
+        let count = text.count + string.count - range.length
+        let aSet = NSCharacterSet(charactersIn:characters).inverted
+        let compSepByCharInSet = string.components(separatedBy: aSet)
+        let numberFiltered = compSepByCharInSet.joined(separator: "")
+        return string == numberFiltered && count <= countLimit && isValidAmount
     }
 }
 
@@ -381,13 +457,14 @@ class MainViewController: UIViewController {
     let numberTextField : BaseTextField = {
         let field = BaseTextField()
         field.placeholder = "Type Number Here"
-        
+        field.tag = 1
         return field
     }()
     
     let monthTextField : BaseTextField = {
         let field = BaseTextField()
         field.placeholder = "Month"
+        field.tag = 2
         field.isHidden = true
         return field
     }()
@@ -395,6 +472,7 @@ class MainViewController: UIViewController {
     let dayTextField : BaseTextField = {
         let field = BaseTextField()
         field.placeholder = "Day"
+        field.tag = 3
         field.isHidden = true
         return field
     }()
