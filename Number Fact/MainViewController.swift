@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 extension MainViewController {
     private func setupView() {
@@ -89,12 +90,14 @@ extension MainViewController {
 extension MainViewController {
     
     func startLoading() {
+        vibrate()
         self.blurredEffectView.isHidden = false
         self.view.isUserInteractionEnabled = false
         self.customIndicator.startAnimating()
     }
     
     func stopLoading() {
+        vibrate()
         self.blurredEffectView.isHidden = true
         self.view.isUserInteractionEnabled = true
         self.customIndicator.stopAnimating()
@@ -138,7 +141,6 @@ extension MainViewController {
     @objc private func buttonTapped(button : UIButton) {
         
         if button.tag == 5 {
-            
             
             if selectedButtonTag == 2 {
                 getDateInfo()
@@ -272,6 +274,18 @@ extension MainViewController {
             }
         }
         return canContinue
+    }
+    
+    private func vibrate() {
+        
+        
+        do {
+            
+            AudioServicesPlaySystemSound(1521)
+            
+        } catch {
+            print ("There is an issue with this code!")
+        }
     }
 }
 
