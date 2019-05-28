@@ -17,6 +17,7 @@ class CustomButton : UIButton {
         setTitleColor(.white, for: UIControlState.normal)
         layer.cornerRadius = 8
         clipsToBounds = true
+        showsTouchWhenHighlighted = false
         tag = Type
         
         switch Type {
@@ -40,6 +41,17 @@ class CustomButton : UIButton {
             bringSubview(toFront: self.titleLabel!)
         }
         
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            if isHighlighted {
+                self.alpha = 0.75
+            } else {
+                self.alpha = 1
+            }
+            
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
