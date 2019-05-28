@@ -21,11 +21,11 @@ class Helper  {
     static func customIndicator(_ view : UIView , center : Bool = false) -> NVActivityIndicatorView {
         
         
-        
+        let size : CGFloat = 80
         let customIndicator : NVActivityIndicatorView = {
-            let indicator = NVActivityIndicatorView(frame: CGRect(x: view.frame.width/2 - 30, y: view.frame.height/4 * (center ? 2 : 3) - 30, width: 60, height: 60))
-            indicator.color = UIColor.init(rgb: 0xEE6A35)
-            indicator.type = NVActivityIndicatorType(rawValue: 22)!
+            let indicator = NVActivityIndicatorView(frame: CGRect(x: view.frame.midX - size/2, y: view.frame.midY - size/2, width: size, height: size))
+            indicator.color = UIColor.white
+            indicator.type = NVActivityIndicatorType(rawValue: 30)!
             return indicator
         }()
         

@@ -22,10 +22,20 @@ extension MainViewController {
         view.addSubview(hitButton)
         view.addSubview(textFieldView)
         view.addSubview(headerLabel)
-        view.addSubview(customIndicator)
+        
         textFieldView.addSubview(numberTextField)
+        textFieldView.addSubview(monthTextField)
+        textFieldView.addSubview(dayTextField)
         resultBackView.addSubview(resultTextView)
         
+        view.addSubview(blurredEffectView)
+        view.addSubview(customIndicator)
+        
+        numberTextField.delegate = self
+        dayTextField.delegate = self
+        monthTextField.delegate = self
+        
+        blurredEffectView.frame = view.frame
         statusView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 20)
         resultBackView.frame = CGRect(x: 10, y: buttonsMaxY + 10, width: view.frame.width - 20, height: view.frame.height/3.5)
         buttomView.frame = CGRect(x: 0, y: view.frame.height/16 * 15, width: view.frame.width, height: view.frame.height/16)
@@ -40,6 +50,10 @@ extension MainViewController {
         textFieldView.frame = CGRect(x: 10, y: resultBackView.frame.maxY + 10, width: view.frame.width - 20, height: hitButtonView.frame.minY - resultBackView.frame.maxY - 10)
         
         numberTextField.frame = CGRect(x: margin, y: 0, width: textFieldView.frame.width - margin * 2, height: textFieldView.frame.height)
+        
+        let dateTieldWidth = textFieldView.frame.width/4
+        monthTextField.frame = CGRect(x: dateTieldWidth, y: 0, width: dateTieldWidth - margin/2, height: textFieldView.frame.height)
+        dayTextField.frame = CGRect(x: textFieldView.frame.midX+margin/2, y: 0, width: dateTieldWidth - margin/2, height: textFieldView.frame.height)
         
         resultTextView.frame = CGRect(x: margin*2, y: margin*2, width: resultBackView.frame.width - margin*4, height: resultBackView.frame.height - margin*4)
         
@@ -74,40 +88,74 @@ extension MainViewController {
 
 extension MainViewController {
     
+    fileprivate func getNumberInfo(_ type: InformationTypes?) {
+        self.blurredEffectView.isHidden = false
+        self.view.isUserInteractionEnabled = false
+        self.customIndicator.startAnimating()
+        API.getInformation(number: UInt(numberTextField.text!)!, type: type!) { (success, response) in
+            DispatchQueue.main.async {
+                self.blurredEffectView.isHidden = true
+                self.view.isUserInteractionEnabled = true
+                self.customIndicator.stopAnimating()
+                if success , response != nil {
+                    self.resultTextView.text = response!.text ?? "This number has uncovered secrets in this era."
+                } else {
+                    Helper.alert(self, title: "", body: "Something Went Wrong!!\nPlease try again later")
+                }
+            }
+        }
+    }
+    
     @objc private func buttonTapped(button : UIButton) {
         
         if button.tag == 5 {
             
-            self.view.alpha = 0.5
-            self.view.isUserInteractionEnabled = false
-            self.customIndicator.startAnimating()
-            
-            if numberTextField.text == "" {
+            guard numberTextField.text != ""  else {
                 Helper.alert(self, title: "", body: "Please Enter a Number.")
                 return
             }
             
-            if UInt(numberTextField.text!) == nil {
+            guard  UInt(numberTextField.text!) != nil else {
                 Helper.alert(self, title: "", body: "Please Enter a Valid Number.")
                 return
             }
             
-            API.getInformation(number: UInt(numberTextField.text!)!, type: InformationTypes.math) { (success, response) in
-                DispatchQueue.main.async {
-                    self.view.alpha = 1
-                    self.view.isUserInteractionEnabled = true
-                    self.customIndicator.stopAnimating()
-                    if success , response != nil {
-                        self.resultTextView.text = response!.text ?? "This number has uncovered secrets in this era."
-                    } else {
-                        Helper.alert(self, title: "", body: "Something Went Wrong!!\nPlease try again later")
-                    }
-                }
+            if !isExpanded {
+                Helper.alert(self, title: "Choose Fact Type", body: "Please choose one of above options.")
+                return
             }
+            
+            var type : InformationTypes?
+            
+            switch selectedButtonTag {
+            case 1 :
+                type = .math
+                break
+            case 2 :
+                break
+            case 3 :
+                type = .year
+                break
+            case 4 :
+                type = .trivia
+                break
+            default :
+                type = nil
+            }
+            
+            guard type != nil else {
+                Helper.alert(self, title: "Choose Fact Type", body: "Please choose one of above options.")
+                return
+            }
+            
+            getNumberInfo(type)
+            
         } else {
             selectButton(selectedButton: button)
         }
     }
+    
+    
     
     fileprivate func handleExpandingBackground(_ selectedButton : UIButton) {
         switch selectedButton.tag {
@@ -127,6 +175,7 @@ extension MainViewController {
     fileprivate func expandButton(_ deselectedButtons: [UIButton], _ selectedButton: UIButton) {
         self.initialFrame = selectedButton.frame
         self.view.bringSubview(toFront: selectedButton)
+        self.selectedButtonTag = selectedButton.tag
         
         UIView.animate(withDuration: animationDuration, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             
@@ -138,8 +187,15 @@ extension MainViewController {
         }) { (success) in
             if success {
                 self.isExpanded = true
+                self.setTextFieldsToDate(selectedButton.tag == 2)
             }
         }
+    }
+    
+    private func setTextFieldsToDate(_ dateMode : Bool) {
+        self.numberTextField.isHidden = dateMode ? true : false
+        self.monthTextField.isHidden = dateMode ? false : true
+        self.dayTextField.isHidden = dateMode ? false : true
     }
     
     fileprivate func minimizeButtons(_ deselectedButtons: [UIButton], _ selectedButton: UIButton) {
@@ -152,6 +208,9 @@ extension MainViewController {
         }) { (success) in
             if success {
                 self.isExpanded = false
+                if selectedButton.tag == 2 {
+                    self.setTextFieldsToDate(false)
+                }
             }
         }
     }
@@ -206,23 +265,48 @@ extension MainViewController {
     }
     
     
+    fileprivate func showKeyboardAnimation(_ keyboardSize: CGRect? , open : Bool) {
+        
+        self.resultBackView.alpha = open ? 0 : 1
+        self.buttomView.alpha = open ? 0 : 1
+        self.hitButton.alpha = open ? 0 : 1
+        if buttonsValid() {
+            self.mathButton!.alpha = open ? 0 : 1
+            self.triviaButton!.alpha = open ? 0 : 1
+            self.yearButton!.alpha = open ? 0 : 1
+            self.dateButton!.alpha = open ? 0 : 1
+        }
+        if open {
+            self.textFieldView.center.y = (view.frame.height - keyboardSize!.height)/2
+        } else {
+            self.textFieldView.frame.origin.y = resultBackView.frame.maxY + 10
+        }
+        
+    }
+    
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if view.frame.origin.y == 0 {
-                self.resultBackView.alpha = 0
-                
-                self.view.frame.origin.y -= (keyboardSize.height+50)
+                self.showKeyboardAnimation(keyboardSize, open: true)
             }
         }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        if view.frame.origin.y != 0 {
-            self.resultBackView.alpha = 1
-            self.view.frame.origin.y = 0
+        if textFieldView.frame.origin.y != 0 {
+            self.showKeyboardAnimation(nil, open: false)
         }
     }
     
+}
+
+extension MainViewController : UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if !isExpanded {
+            Helper.alert(self, title: "Choose Fact Type", body: "Please choose one of above options.")
+            textField.resignFirstResponder()
+        }
+    }
 }
 
 class MainViewController: UIViewController {
@@ -245,6 +329,8 @@ class MainViewController: UIViewController {
     private var isExpanded : Bool = false
     private var initialFrame : CGRect = .zero
     
+    private var selectedButtonTag : Int = 0
+    
     lazy var buttonsHeight = view.frame.height/8
     lazy var buttonsWidth = view.frame.width/2 - (margin*3)/2
     
@@ -263,6 +349,14 @@ class MainViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 25, weight: UIFont.Weight.thin)
         return label
+    }()
+    
+    
+    let blurredEffectView : UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.isHidden = true
+        return view
     }()
     
     let resultBackView : UIView = {
@@ -287,12 +381,21 @@ class MainViewController: UIViewController {
     let numberTextField : BaseTextField = {
         let field = BaseTextField()
         field.placeholder = "Type Number Here"
-        field.textAlignment = .center
-        field.textColor = .white
-        field.font = UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.semibold)
-        field.tintColor = .white
-        field.keyboardType = .numberPad
-        field.keyboardAppearance = .dark
+        
+        return field
+    }()
+    
+    let monthTextField : BaseTextField = {
+        let field = BaseTextField()
+        field.placeholder = "Month"
+        field.isHidden = true
+        return field
+    }()
+    
+    let dayTextField : BaseTextField = {
+        let field = BaseTextField()
+        field.placeholder = "Day"
+        field.isHidden = true
         return field
     }()
     

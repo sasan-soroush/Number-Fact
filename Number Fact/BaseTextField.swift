@@ -13,6 +13,12 @@ class BaseTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         autocorrectionType = UITextAutocorrectionType.no
+        textAlignment = .center
+        textColor = .white
+        font = UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.semibold)
+        tintColor = .white
+        keyboardType = .numberPad
+        keyboardAppearance = .dark
         self.addDoneButtonOnKeyboard()
     }
     
