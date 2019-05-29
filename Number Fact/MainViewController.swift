@@ -90,17 +90,25 @@ extension MainViewController {
 extension MainViewController {
     
     func startLoading() {
-        vibrate()
+        self.vibrate()
         self.blurredEffectView.isHidden = false
         self.view.isUserInteractionEnabled = false
         self.customIndicator.startAnimating()
     }
     
     func stopLoading() {
-        vibrate()
+        self.vibrate()
         self.blurredEffectView.isHidden = true
         self.view.isUserInteractionEnabled = true
         self.customIndicator.stopAnimating()
+    }
+    
+    private func resetPage() {
+        self.vibrate()
+        self.numberTextField.text = ""
+        self.monthTextField.text = ""
+        self.dayTextField.text = ""
+        
     }
     
     fileprivate func getNumberInfo(_ type: InformationTypes?) {
@@ -239,6 +247,7 @@ extension MainViewController {
             deselectedButtons.forEach {$0.alpha = 1}
             selectedButton.frame = self.initialFrame
             self.handleExpandingBackground(selectedButton)
+            self.resetPage()
             
         }) { (success) in
             if success {
@@ -290,11 +299,23 @@ extension MainViewController {
 }
 
 extension MainViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupView()
-        addKeyboardNotifiactions()
+        view.addSubview(logoAnimationView)
+        logoAnimationView.frame = view.frame
+        logoAnimationView.logoGifImageView?.delegate = self
+ 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        logoAnimationView.logoGifImageView?.startAnimatingGif()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -302,6 +323,14 @@ extension MainViewController {
     }
     
     
+}
+
+extension MainViewController: SwiftyGifDelegate {
+    func gifDidStop(sender: UIImageView) {
+        logoAnimationView.isHidden = true
+        setupView()
+        addKeyboardNotifiactions()
+    }
 }
 
 extension MainViewController {
@@ -404,6 +433,8 @@ class MainViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    let logoAnimationView = LogoAnimationView()
     
     private let margin : CGFloat = 10
     private let animationDuration : TimeInterval = 0.5

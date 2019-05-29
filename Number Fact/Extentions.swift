@@ -45,6 +45,15 @@ extension UIView {
         layer.shadowRadius = 10
     }
     
+    func setBackgroundImage(img: UIImage){
+        
+        UIGraphicsBeginImageContext(self.frame.size)
+        img.draw(in: self.bounds)
+        let patternImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        self.backgroundColor = UIColor(patternImage: patternImage)
+    }
+    
 }
 
 

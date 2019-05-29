@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2034D28229E9594000317FE /* Group 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2034D27229E9594000317FE /* Group 2.png */; };
+		B2034D2D229E95DB000317FE /* Group 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B2034D2A229E95DB000317FE /* Group 3.png */; };
 		B22FADFB229D500300DA3A3C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FADFA229D500300DA3A3C /* API.swift */; };
 		B22FADFD229D50CC00DA3A3C /* InformationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FADFC229D50CC00DA3A3C /* InformationTypes.swift */; };
 		B22FADFF229D50EC00DA3A3C /* NumberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FADFE229D50EC00DA3A3C /* NumberInfo.swift */; };
@@ -52,6 +54,11 @@
 		B22FAE56229D91C700DA3A3C /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FAE30229D91C700DA3A3C /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift */; };
 		B22FAE57229D91C700DA3A3C /* NVActivityIndicatorAnimationBallPulseRise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FAE31229D91C700DA3A3C /* NVActivityIndicatorAnimationBallPulseRise.swift */; };
 		B22FAE58229D91C700DA3A3C /* NVActivityIndicatorAnimationOrbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FAE32229D91C700DA3A3C /* NVActivityIndicatorAnimationOrbit.swift */; };
+		B22FAE5A229E840D00DA3A3C /* SplashLogo.gif in Resources */ = {isa = PBXBuildFile; fileRef = B22FAE59229E840D00DA3A3C /* SplashLogo.gif */; };
+		B22FAE61229E8BA700DA3A3C /* UIImageView+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FAE5C229E8BA700DA3A3C /* UIImageView+SwiftyGif.swift */; };
+		B22FAE62229E8BA700DA3A3C /* UIImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FAE5D229E8BA700DA3A3C /* UIImage+SwiftyGif.swift */; };
+		B22FAE63229E8BA700DA3A3C /* SwiftyGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FAE5F229E8BA700DA3A3C /* SwiftyGifManager.swift */; };
+		B22FAE66229E8BDF00DA3A3C /* LogoAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FAE65229E8BDF00DA3A3C /* LogoAnimationView.swift */; };
 		B2B06C7E2168AD3C00EA300A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B06C7D2168AD3C00EA300A /* AppDelegate.swift */; };
 		B2B06C802168AD3C00EA300A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B06C7F2168AD3C00EA300A /* MainViewController.swift */; };
 		B2B06C852168AD3E00EA300A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2B06C842168AD3E00EA300A /* Assets.xcassets */; };
@@ -62,6 +69,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B2034D27229E9594000317FE /* Group 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 2.png"; sourceTree = "<group>"; };
+		B2034D2A229E95DB000317FE /* Group 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 3.png"; sourceTree = "<group>"; };
 		B22FADFA229D500300DA3A3C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		B22FADFC229D50CC00DA3A3C /* InformationTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTypes.swift; sourceTree = "<group>"; };
 		B22FADFE229D50EC00DA3A3C /* NumberInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInfo.swift; sourceTree = "<group>"; };
@@ -108,6 +117,13 @@
 		B22FAE30229D91C700DA3A3C /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationLineScalePulseOutRapid.swift; sourceTree = "<group>"; };
 		B22FAE31229D91C700DA3A3C /* NVActivityIndicatorAnimationBallPulseRise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallPulseRise.swift; sourceTree = "<group>"; };
 		B22FAE32229D91C700DA3A3C /* NVActivityIndicatorAnimationOrbit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationOrbit.swift; sourceTree = "<group>"; };
+		B22FAE59229E840D00DA3A3C /* SplashLogo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = SplashLogo.gif; sourceTree = "<group>"; };
+		B22FAE5C229E8BA700DA3A3C /* UIImageView+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+SwiftyGif.swift"; sourceTree = "<group>"; };
+		B22FAE5D229E8BA700DA3A3C /* UIImage+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SwiftyGif.swift"; sourceTree = "<group>"; };
+		B22FAE5E229E8BA700DA3A3C /* SwiftyGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyGif.h; sourceTree = "<group>"; };
+		B22FAE5F229E8BA700DA3A3C /* SwiftyGifManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyGifManager.swift; sourceTree = "<group>"; };
+		B22FAE60229E8BA700DA3A3C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B22FAE65229E8BDF00DA3A3C /* LogoAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoAnimationView.swift; sourceTree = "<group>"; };
 		B2B06C7A2168AD3C00EA300A /* Number Fact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Number Fact.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2B06C7D2168AD3C00EA300A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2B06C7F2168AD3C00EA300A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +208,18 @@
 			path = Animations;
 			sourceTree = "<group>";
 		};
+		B22FAE5B229E8BA700DA3A3C /* SwiftyGif */ = {
+			isa = PBXGroup;
+			children = (
+				B22FAE5C229E8BA700DA3A3C /* UIImageView+SwiftyGif.swift */,
+				B22FAE5D229E8BA700DA3A3C /* UIImage+SwiftyGif.swift */,
+				B22FAE5E229E8BA700DA3A3C /* SwiftyGif.h */,
+				B22FAE5F229E8BA700DA3A3C /* SwiftyGifManager.swift */,
+				B22FAE60229E8BA700DA3A3C /* Info.plist */,
+			);
+			path = SwiftyGif;
+			sourceTree = "<group>";
+		};
 		B2B06C712168AD3B00EA300A = {
 			isa = PBXGroup;
 			children = (
@@ -211,7 +239,11 @@
 		B2B06C7C2168AD3C00EA300A /* Number Fact */ = {
 			isa = PBXGroup;
 			children = (
+				B2034D27229E9594000317FE /* Group 2.png */,
+				B2034D2A229E95DB000317FE /* Group 3.png */,
 				B22FAE09229D91C700DA3A3C /* NVActivityIndicatorView copy */,
+				B22FAE5B229E8BA700DA3A3C /* SwiftyGif */,
+				B22FAE59229E840D00DA3A3C /* SplashLogo.gif */,
 				B2B06C7D2168AD3C00EA300A /* AppDelegate.swift */,
 				B2B06C7F2168AD3C00EA300A /* MainViewController.swift */,
 				B2B06C912168AEDC00EA300A /* Extentions.swift */,
@@ -227,6 +259,7 @@
 				B22FAE02229D89D700DA3A3C /* BaseTextField.swift */,
 				B22FAE05229D8D3800DA3A3C /* BaseTextView.swift */,
 				B22FAE07229D900E00DA3A3C /* Helper.swift */,
+				B22FAE65229E8BDF00DA3A3C /* LogoAnimationView.swift */,
 			);
 			path = "Number Fact";
 			sourceTree = "<group>";
@@ -289,7 +322,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2034D2D229E95DB000317FE /* Group 3.png in Resources */,
 				B2B06C882168AD3E00EA300A /* LaunchScreen.storyboard in Resources */,
+				B2034D28229E9594000317FE /* Group 2.png in Resources */,
+				B22FAE5A229E840D00DA3A3C /* SplashLogo.gif in Resources */,
 				B2B06C852168AD3E00EA300A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +339,7 @@
 			files = (
 				B22FAE4F229D91C700DA3A3C /* NVActivityIndicatorAnimationLineScale.swift in Sources */,
 				B22FAE46229D91C700DA3A3C /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
+				B22FAE66229E8BDF00DA3A3C /* LogoAnimationView.swift in Sources */,
 				B22FAE37229D91C700DA3A3C /* NVActivityIndicatorView.swift in Sources */,
 				B22FAE4B229D91C700DA3A3C /* NVActivityIndicatorAnimationAudioEqualizer.swift in Sources */,
 				B22FAE49229D91C700DA3A3C /* NVActivityIndicatorAnimationBlank.swift in Sources */,
@@ -331,9 +368,11 @@
 				B2B06C802168AD3C00EA300A /* MainViewController.swift in Sources */,
 				B22FAE01229D642700DA3A3C /* URLCreator.swift in Sources */,
 				B22FAE36229D91C700DA3A3C /* NVActivityIndicatorShape.swift in Sources */,
+				B22FAE62229E8BA700DA3A3C /* UIImage+SwiftyGif.swift in Sources */,
 				B22FAE47229D91C700DA3A3C /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */,
 				B22FAE3E229D91C700DA3A3C /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */,
 				B22FAE4A229D91C700DA3A3C /* NVActivityIndicatorAnimationCircleStrokeSpin.swift in Sources */,
+				B22FAE63229E8BA700DA3A3C /* SwiftyGifManager.swift in Sources */,
 				B22FAE34229D91C700DA3A3C /* NVActivityIndicatorPresenter.swift in Sources */,
 				B22FAE42229D91C700DA3A3C /* NVActivityIndicatorAnimationBallBeat.swift in Sources */,
 				B22FAE4E229D91C700DA3A3C /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */,
@@ -341,6 +380,7 @@
 				B2B06C902168AE5900EA300A /* Enums.swift in Sources */,
 				B2B06C7E2168AD3C00EA300A /* AppDelegate.swift in Sources */,
 				B22FAE55229D91C700DA3A3C /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,
+				B22FAE61229E8BA700DA3A3C /* UIImageView+SwiftyGif.swift in Sources */,
 				B22FAE4C229D91C700DA3A3C /* NVActivityIndicatorAnimationTriangleSkewSpin.swift in Sources */,
 				B22FAE38229D91C700DA3A3C /* NVActivityIndicatorAnimationBallRotate.swift in Sources */,
 				B22FAE3C229D91C700DA3A3C /* NVActivityIndicatorAnimationBallTrianglePath.swift in Sources */,
