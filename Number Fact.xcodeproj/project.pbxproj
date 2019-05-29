@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B2034D28229E9594000317FE /* Group 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2034D27229E9594000317FE /* Group 2.png */; };
-		B2034D2D229E95DB000317FE /* Group 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B2034D2A229E95DB000317FE /* Group 3.png */; };
+		B2034D30229E9E1F000317FE /* Group 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B2034D2F229E9E1E000317FE /* Group 3.png */; };
 		B22FADFB229D500300DA3A3C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FADFA229D500300DA3A3C /* API.swift */; };
 		B22FADFD229D50CC00DA3A3C /* InformationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FADFC229D50CC00DA3A3C /* InformationTypes.swift */; };
 		B22FADFF229D50EC00DA3A3C /* NumberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22FADFE229D50EC00DA3A3C /* NumberInfo.swift */; };
@@ -70,7 +70,7 @@
 
 /* Begin PBXFileReference section */
 		B2034D27229E9594000317FE /* Group 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 2.png"; sourceTree = "<group>"; };
-		B2034D2A229E95DB000317FE /* Group 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 3.png"; sourceTree = "<group>"; };
+		B2034D2F229E9E1E000317FE /* Group 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Group 3.png"; path = "../../../../Group 3.png"; sourceTree = "<group>"; };
 		B22FADFA229D500300DA3A3C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		B22FADFC229D50CC00DA3A3C /* InformationTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTypes.swift; sourceTree = "<group>"; };
 		B22FADFE229D50EC00DA3A3C /* NumberInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInfo.swift; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				B2034D27229E9594000317FE /* Group 2.png */,
-				B2034D2A229E95DB000317FE /* Group 3.png */,
+				B2034D2F229E9E1E000317FE /* Group 3.png */,
 				B22FAE09229D91C700DA3A3C /* NVActivityIndicatorView copy */,
 				B22FAE5B229E8BA700DA3A3C /* SwiftyGif */,
 				B22FAE59229E840D00DA3A3C /* SplashLogo.gif */,
@@ -322,7 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2034D2D229E95DB000317FE /* Group 3.png in Resources */,
+				B2034D30229E9E1F000317FE /* Group 3.png in Resources */,
 				B2B06C882168AD3E00EA300A /* LaunchScreen.storyboard in Resources */,
 				B2034D28229E9594000317FE /* Group 2.png in Resources */,
 				B22FAE5A229E840D00DA3A3C /* SplashLogo.gif in Resources */,

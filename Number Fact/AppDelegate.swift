@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate , CAAnimationDelegate {
         window?.backgroundColor = Colors.background.rawValue
         window?.makeKeyAndVisible()
         window?.rootViewController = MainViewController()
-        window?.setBackgroundImage(img: #imageLiteral(resourceName: "LaunchWithoutLogo"))
         //let navigationController = UINavigationController(rootViewController: MainViewController() )
         //animateLaunchScreen(navigationController)
 

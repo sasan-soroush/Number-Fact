@@ -24,7 +24,7 @@ class LogoAnimationView: UIView {
     
     private func commonInit() {
         
-        self.backgroundColor = UIColor.init(rgb: 0x594CFE)
+        self.backgroundColor = UIColor.init(rgb: 0x262D49)
         
         do {
             logoGifImageView = try UIImageView(gifImage: UIImage(gifName: "SplashLogo.gif"), loopCount: 2)
